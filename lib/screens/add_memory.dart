@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoir/providers/user_memory.dart';
+import 'package:memoir/core/utils/photo_input.dart';
 
 class AddMemoryScreen extends ConsumerStatefulWidget {
   const AddMemoryScreen({super.key});
@@ -44,6 +45,10 @@ class _AddMemoryState extends ConsumerState<AddMemoryScreen> {
               controller: _titleController,
               style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
             ),
+            const SizedBox(
+              height: 20,
+            ),
+            PhotoInput(),
             const SizedBox(
               height: 20,
             ),

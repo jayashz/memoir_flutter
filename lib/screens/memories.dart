@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memoir/core/constants/images.dart';
 import 'package:memoir/providers/user_memory.dart';
 import 'package:memoir/screens/add_memory.dart';
 import 'package:memoir/widgets/memory_list.dart';
@@ -13,7 +14,7 @@ class MemoriesScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
-          'assets/logo/Memoir.png',
+          Images.memoirLogo,
           height: 100,
         ),
         actions: [

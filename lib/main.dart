@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:memoir/screens/memories.dart';
-import 'package:memoir/theme/theme.dart';
+import 'package:memoir/config/theme/theme.dart';
 
 final colorScheme = ColorScheme.fromSeed(
   brightness: Brightness.dark,
