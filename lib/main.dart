@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:memoir/screens/places.dart';
+import 'package:memoir/screens/memories.dart';
 import 'package:memoir/theme/theme.dart';
 
 final colorScheme = ColorScheme.fromSeed(
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Great Places',
       theme: theme,
-      home: Scaffold(body: PlacesScreen()),
+      home: Scaffold(body: MemoriesScreen()),
     );
   }
 }

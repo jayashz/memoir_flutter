@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memoir/providers/user_places.dart';
+import 'package:memoir/providers/user_memory.dart';
 
-class AddPlaceScreen extends ConsumerStatefulWidget {
-  const AddPlaceScreen({super.key});
+class AddMemoryScreen extends ConsumerStatefulWidget {
+  const AddMemoryScreen({super.key});
 
   @override
-  ConsumerState<AddPlaceScreen> createState() => _AddPlaceScreenState();
+  ConsumerState<AddMemoryScreen> createState() => _AddMemoryState();
 }
 
-class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
+class _AddMemoryState extends ConsumerState<AddMemoryScreen> {
   final _titleController = TextEditingController();
 
-  void _savePlace() {
+  void _saveMemory() {
     final enteredTitle = _titleController.text;
     if (enteredTitle.isEmpty) return;
-    ref.read(userPlaceProvider.notifier).addPlace(enteredTitle);
+    ref.read(userMemoryProvider.notifier).addPlace(enteredTitle);
 
     Navigator.of(context).pop();
   }
@@ -48,7 +48,7 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
               height: 20,
             ),
             ElevatedButton.icon(
-              onPressed: _savePlace,
+              onPressed: _saveMemory,
               icon: Icon(Icons.save),
               label: const Text("Add place"),
             ),

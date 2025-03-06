@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:memoir/models/place.dart';
+import 'package:memoir/models/memory.dart';
 
-class PlacesDetailsScreen extends StatelessWidget {
-  const PlacesDetailsScreen({super.key, required this.place});
-  final Place place;
+class MemoryDetailsScreen extends StatelessWidget {
+  const MemoryDetailsScreen({super.key, required this.place});
+  final Memory place;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

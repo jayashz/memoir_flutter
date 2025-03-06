@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:memoir/models/place.dart';
-import 'package:memoir/screens/places_details.dart';
+import 'package:memoir/models/memory.dart';
+import 'package:memoir/screens/memory_details.dart';
 
-class PlacesList extends StatelessWidget {
-  const PlacesList({super.key, required this.places});
-  final List<Place> places;
+class MemoryList extends StatelessWidget {
+  const MemoryList({super.key, required this.places});
+  final List<Memory> places;
   @override
   Widget build(BuildContext context) {
     if (places.isEmpty) {
       return Center(
         child: Text(
-          "No places added.",
+          "No Memories added.",
           style: Theme.of(context)
               .textTheme
               .bodyLarge!
@@ -24,7 +24,7 @@ class PlacesList extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (ctx) =>
-                        PlacesDetailsScreen(place: places[index])));
+                        MemoryDetailsScreen(place: places[index])));
               },
               title: Text(
                 places[index].title,
