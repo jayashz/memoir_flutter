@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memoir/core/utils/location_input.dart';
 import 'package:memoir/providers/user_memory.dart';
 import 'package:memoir/core/utils/photo_input.dart';
 
@@ -55,6 +56,10 @@ class _AddMemoryState extends ConsumerState<AddMemoryScreen> {
             PhotoInput(onPickPhoto: (photo) {
               _pickedPhoto = photo;
             }),
+            const SizedBox(
+              height: 20,
+            ),
+            LocationInput(),
             const SizedBox(
               height: 20,
             ),

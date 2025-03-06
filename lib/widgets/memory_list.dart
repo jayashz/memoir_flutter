@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:memoir/models/memory.dart';
 import 'package:memoir/screens/memory_details.dart';
@@ -27,8 +25,11 @@ class MemoryList extends StatelessWidget {
       padding: EdgeInsets.all(12),
       itemBuilder: (ctx, index) => GestureDetector(
         onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (ctx) => MemoryDetailsScreen(memory: memories[index])));
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (ctx) => MemoryDetailsScreen(memory: memories[index]),
+            ),
+          );
         },
         child: Padding(
           padding: EdgeInsets.only(bottom: 16),

@@ -12,6 +12,9 @@
 .swiftpm/
 migrate_working_dir/
 
+keys.dart
+
+
 # IntelliJ related
 *.iml
 *.ipr
