@@ -15,6 +15,8 @@ class LocationInput extends StatefulWidget {
 
 class _LocationInputState extends State<LocationInput> {
   var _isGettingLocation = false;
+  PlaceLocation? userLocation;
+  String? mapImageUrl;
 
   void _getCurrentLocation() async {
     Location? location = Location();
@@ -52,10 +54,13 @@ class _LocationInputState extends State<LocationInput> {
     final res = jsonDecode(response.body.toString());
     final formattedLocation = res['features'][0]['properties']['formatted'];
 
-    final userLocation = PlaceLocation(
+    userLocation = PlaceLocation(
         address: formattedLocation, latitude: latitude, longitude: longitude);
 
     widget.getLocation(userLocation);
+
+    mapImageUrl =
+        'https://maps.geoapify.com/v1/staticmap?style=osm-bright-smooth&width=400&height=300&center=lonlat%3A$longitude%2C$latitude&zoom=14.3497&marker=lonlat%3A$longitude%2C$latitude&apiKey=5d2ebf29a4284b56996ce858fcf181e9';
 
     setState(() {
       _isGettingLocation = false;
@@ -67,6 +72,9 @@ class _LocationInputState extends State<LocationInput> {
     Widget previewContent = Text(
       'No location selected',
     );
+    if (userLocation != null) {
+      previewContent = Image.network(mapImageUrl!);
+    }
     if (_isGettingLocation == true) {
       previewContent = CircularProgressIndicator();
     }
