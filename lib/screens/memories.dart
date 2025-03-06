@@ -11,6 +11,7 @@ class MemoriesScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userMemory = ref.watch(userMemoryProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
@@ -27,7 +28,7 @@ class MemoriesScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: MemoryList(places: userMemory),
+      body: MemoryList(memories: userMemory),
     );
   }
 }

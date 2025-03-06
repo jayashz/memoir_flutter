@@ -5,7 +5,7 @@ import 'package:memoir/models/memory.dart';
 class UserMemoryNotifier extends StateNotifier<List<Memory>> {
   UserMemoryNotifier() : super(const []);
 
-  void addPlace(String title, File photo) {
+  void addMemory(String title, File photo) {
     final newMemory = Memory(title: title, photo: photo);
     state = [...state, newMemory];
   }

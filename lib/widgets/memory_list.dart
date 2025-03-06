@@ -3,11 +3,11 @@ import 'package:memoir/models/memory.dart';
 import 'package:memoir/screens/memory_details.dart';
 
 class MemoryList extends StatelessWidget {
-  const MemoryList({super.key, required this.places});
-  final List<Memory> places;
+  const MemoryList({super.key, required this.memories});
+  final List<Memory> memories;
   @override
   Widget build(BuildContext context) {
-    if (places.isEmpty) {
+    if (memories.isEmpty) {
       return Center(
         child: Text(
           "No Memories added.",
@@ -19,20 +19,26 @@ class MemoryList extends StatelessWidget {
       );
     }
     return ListView.builder(
-        itemCount: places.length,
-        itemBuilder: (ctx, index) => ListTile(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (ctx) =>
-                        MemoryDetailsScreen(place: places[index])));
-              },
-              title: Text(
-                places[index].title,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium!
-                    .copyWith(color: Theme.of(context).colorScheme.onSurface),
-              ),
-            ));
+      itemCount: memories.length,
+      padding: EdgeInsets.all(12),
+      itemBuilder: (ctx, index) => GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (ctx) => MemoryDetailsScreen(memory: memories[index])));
+        },
+        child: Padding(
+          padding: EdgeInsets.only(bottom: 16),
+          child: Container(
+            height: 250,
+            width: double.infinity,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: FileImage(memories[index].photo, scale: 1),
+                    fit: BoxFit.cover),
+                borderRadius: BorderRadius.circular(12)),
+          ),
+        ),
+      ),
+    );
   }
 }

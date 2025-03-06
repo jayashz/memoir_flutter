@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoir/providers/user_memory.dart';
@@ -12,11 +13,14 @@ class AddMemoryScreen extends ConsumerStatefulWidget {
 
 class _AddMemoryState extends ConsumerState<AddMemoryScreen> {
   final _titleController = TextEditingController();
+  File? _pickedPhoto;
 
   void _saveMemory() {
     final enteredTitle = _titleController.text;
     if (enteredTitle.isEmpty) return;
-    ref.read(userMemoryProvider.notifier).addPlace(enteredTitle);
+    ref
+        .read(userMemoryProvider.notifier)
+        .addMemory(enteredTitle, _pickedPhoto!);
 
     Navigator.of(context).pop();
   }
@@ -48,7 +52,9 @@ class _AddMemoryState extends ConsumerState<AddMemoryScreen> {
             const SizedBox(
               height: 20,
             ),
-            PhotoInput(),
+            PhotoInput(onPickPhoto: (photo) {
+              _pickedPhoto = photo;
+            }),
             const SizedBox(
               height: 20,
             ),
