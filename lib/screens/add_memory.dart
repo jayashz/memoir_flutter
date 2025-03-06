@@ -19,9 +19,11 @@ class _AddMemoryState extends ConsumerState<AddMemoryScreen> {
   void _saveMemory() {
     final enteredTitle = _titleController.text;
     if (enteredTitle.isEmpty) return;
-    ref
-        .read(userMemoryProvider.notifier)
-        .addMemory(enteredTitle, _pickedPhoto!);
+    //Location to be added here from location input
+    ref.read(userMemoryProvider.notifier).addMemory(
+          enteredTitle,
+          _pickedPhoto!,
+        );
 
     Navigator.of(context).pop();
   }
