@@ -44,7 +44,7 @@ class MemoryList extends StatelessWidget {
             ),
             alignment: Alignment.bottomLeft,
             child: Text(
-              memories[index].title,
+              memories[index].location.address,
               style: TextStyle(fontSize: 20, color: Colors.white),
             ),
           ),

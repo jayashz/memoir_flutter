@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memoir/core/utils/location_input.dart';
+import 'package:memoir/models/memory.dart';
 import 'package:memoir/providers/user_memory.dart';
 import 'package:memoir/core/utils/photo_input.dart';
 
@@ -15,15 +16,17 @@ class AddMemoryScreen extends ConsumerStatefulWidget {
 class _AddMemoryState extends ConsumerState<AddMemoryScreen> {
   final _titleController = TextEditingController();
   File? _pickedPhoto;
+  PlaceLocation? _userPlace;
 
   void _saveMemory() {
     final enteredTitle = _titleController.text;
-    if (enteredTitle.isEmpty) return;
-    //Location to be added here from location input
-    ref.read(userMemoryProvider.notifier).addMemory(
-          enteredTitle,
-          _pickedPhoto!,
-        );
+    if (enteredTitle.isEmpty || _userPlace == null || _pickedPhoto == null) {
+      return;
+    }
+
+    ref
+        .read(userMemoryProvider.notifier)
+        .addMemory(enteredTitle, _pickedPhoto!, _userPlace!);
 
     Navigator.of(context).pop();
   }
@@ -61,7 +64,9 @@ class _AddMemoryState extends ConsumerState<AddMemoryScreen> {
             const SizedBox(
               height: 20,
             ),
-            LocationInput(),
+            LocationInput(getLocation: (place) {
+              _userPlace = place;
+            }),
             const SizedBox(
               height: 20,
             ),

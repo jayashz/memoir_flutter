@@ -1,11 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
 import 'package:memoir/core/utils/keys.dart';
+import 'package:memoir/models/memory.dart';
 
 class LocationInput extends StatefulWidget {
-  const LocationInput({super.key});
-
+  LocationInput({super.key, required this.getLocation});
+  void Function(PlaceLocation place) getLocation;
   @override
   State<LocationInput> createState() => _LocationInputState();
 }
@@ -38,11 +41,22 @@ class _LocationInputState extends State<LocationInput> {
       _isGettingLocation = true;
     });
     locationData = await location.getLocation();
+
+    var latitude = locationData.latitude!;
+    var longitude = locationData.longitude!;
+
     final url = Uri.parse(
-        'https://maps.googleapis.com/maps/api/geocode/json?latlng=${locationData.latitude},${locationData.longitude}&key=$googleMapsApiKey');
-    final res = await http.get(url);
-    print(url);
-    print(res.body);
+        'https://api.geoapify.com/v1/geocode/reverse?lat=$latitude&lon=$longitude&apiKey=$mapApi');
+    final response = await http.get(url);
+
+    final res = jsonDecode(response.body.toString());
+    final formattedLocation = res['features'][0]['properties']['formatted'];
+
+    final userLocation = PlaceLocation(
+        address: formattedLocation, latitude: latitude, longitude: longitude);
+
+    widget.getLocation(userLocation);
+
     setState(() {
       _isGettingLocation = false;
     });
