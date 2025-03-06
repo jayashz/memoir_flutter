@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:memoir/models/memory.dart';
 import 'package:memoir/screens/memory_details.dart';
@@ -20,6 +22,8 @@ class MemoryList extends StatelessWidget {
     }
     return ListView.builder(
       itemCount: memories.length,
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       padding: EdgeInsets.all(12),
       itemBuilder: (ctx, index) => GestureDetector(
         onTap: () {
@@ -30,12 +34,18 @@ class MemoryList extends StatelessWidget {
           padding: EdgeInsets.only(bottom: 16),
           child: Container(
             height: 250,
-            width: double.infinity,
+            padding: EdgeInsets.all(8),
             decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: FileImage(memories[index].photo, scale: 1),
-                    fit: BoxFit.cover),
-                borderRadius: BorderRadius.circular(12)),
+              image: DecorationImage(
+                  image: FileImage(memories[index].photo, scale: 1),
+                  fit: BoxFit.cover),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            alignment: Alignment.bottomLeft,
+            child: Text(
+              memories[index].title,
+              style: TextStyle(fontSize: 20, color: Colors.white),
+            ),
           ),
         ),
       ),

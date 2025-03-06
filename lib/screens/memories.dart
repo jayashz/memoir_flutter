@@ -13,22 +13,30 @@ class MemoriesScreen extends ConsumerWidget {
     final userMemory = ref.watch(userMemoryProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Image.asset(
-          Images.memoirLogo,
-          height: 100,
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (ctx) => const AddMemoryScreen()));
-            },
-            icon: const Icon(Icons.add),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            expandedHeight: 100,
+            floating: true,
+            title: Image.asset(
+              Images.memoirLogoDark,
+              height: 100,
+            ),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (ctx) => const AddMemoryScreen()));
+                },
+                icon: const Icon(Icons.add),
+              ),
+            ],
+          ),
+          SliverToBoxAdapter(
+            child: MemoryList(memories: userMemory),
           ),
         ],
       ),
-      body: MemoryList(memories: userMemory),
     );
   }
 }

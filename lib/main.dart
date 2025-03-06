@@ -20,9 +20,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Great Places',
       theme: theme,
-      home: Scaffold(body: MemoriesScreen()),
+      home: Scaffold(
+        body: MemoriesScreen(),
+      ),
     );
   }
 }
