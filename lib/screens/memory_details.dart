@@ -1,15 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memoir/core/utils/database.dart';
 import 'package:memoir/models/memory.dart';
+import 'package:memoir/providers/user_memory.dart';
 
-class MemoryDetailsScreen extends StatelessWidget {
+class MemoryDetailsScreen extends ConsumerStatefulWidget {
   const MemoryDetailsScreen({super.key, required this.memory});
   final Memory memory;
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _MemoryDetailsScreen();
+}
+
+class _MemoryDetailsScreen extends ConsumerState<MemoryDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(memory.title),
+        title: Text(widget.memory.title),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -22,24 +30,32 @@ class MemoryDetailsScreen extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: Image(
-                  image: FileImage(memory.photo),
+                  image: FileImage(widget.memory.photo),
                 ),
               ),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
                   onPressed: () {},
                   icon: Icon(CupertinoIcons.heart),
+                  iconSize: 30,
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ref
+                        .read(userMemoryProvider.notifier)
+                        .deleteMemory(widget.memory.id);
+                    Navigator.of(context).pop();
+                  },
                   icon: Icon(CupertinoIcons.delete),
+                  iconSize: 30,
                 ),
               ],
             ),
             Text(
-              memory.memoryDescription,
+              widget.memory.memoryDescription,
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ],

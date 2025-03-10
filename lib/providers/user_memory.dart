@@ -53,6 +53,14 @@ class UserMemoryNotifier extends StateNotifier<List<Memory>> {
     });
     state = [...state, newMemory];
   }
+
+  Future<void> deleteMemory(String id) async {
+    final db = await getDataBase();
+    await db.delete('user_memories', where: 'id = ?', whereArgs: [id]);
+
+    final newState = state.where((mem) => mem.id != id).toList();
+    state = [...newState];
+  }
 }
 
 final userMemoryProvider =
