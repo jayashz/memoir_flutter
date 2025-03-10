@@ -15,7 +15,6 @@ class _MemoriesScreenState extends ConsumerState<MemoriesScreen> {
   late Future<void> _memoriesFuture;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _memoriesFuture = ref.read(userMemoryProvider.notifier).loadMemories();
   }

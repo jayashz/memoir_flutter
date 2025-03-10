@@ -5,7 +5,7 @@ import 'package:memoir/core/utils/location_input.dart';
 import 'package:memoir/models/memory.dart';
 import 'package:memoir/providers/user_memory.dart';
 import 'package:memoir/core/utils/photo_input.dart';
-import 'package:memoir/widgets/CustomInput.dart';
+import 'package:memoir/widgets/custom_input.dart';
 
 class AddMemoryScreen extends ConsumerStatefulWidget {
   const AddMemoryScreen({super.key});
@@ -35,7 +35,6 @@ class _AddMemoryState extends ConsumerState<AddMemoryScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _titleController.dispose();
     super.dispose();
   }
@@ -72,7 +71,7 @@ class _AddMemoryState extends ConsumerState<AddMemoryScreen> {
             const SizedBox(
               height: 20,
             ),
-            Custominput(onAddMemoryDescription: (String des) {
+            CustomInput(onAddMemoryDescription: (String des) {
               memoryDescription = des;
             }),
             const SizedBox(

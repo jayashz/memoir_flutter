@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-class Custominput extends StatelessWidget {
-  const Custominput({super.key, required this.onAddMemoryDescription});
+class CustomInput extends StatelessWidget {
+  const CustomInput({super.key, required this.onAddMemoryDescription});
+
   final Function(String des) onAddMemoryDescription;
   @override
   Widget build(BuildContext context) {

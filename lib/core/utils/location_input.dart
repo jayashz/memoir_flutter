@@ -7,8 +7,8 @@ import 'package:memoir/core/utils/keys.dart';
 import 'package:memoir/models/memory.dart';
 
 class LocationInput extends StatefulWidget {
-  LocationInput({super.key, required this.getLocation});
-  void Function(PlaceLocation place) getLocation;
+  const LocationInput({super.key, required this.getLocation});
+  final void Function(PlaceLocation place) getLocation;
   @override
   State<LocationInput> createState() => _LocationInputState();
 }
@@ -42,6 +42,7 @@ class _LocationInputState extends State<LocationInput> {
     setState(() {
       _isGettingLocation = true;
     });
+
     locationData = await location.getLocation();
 
     var latitude = locationData.latitude!;
@@ -49,6 +50,7 @@ class _LocationInputState extends State<LocationInput> {
 
     final url = Uri.parse(
         'https://api.geoapify.com/v1/geocode/reverse?lat=$latitude&lon=$longitude&apiKey=$mapApi');
+
     final response = await http.get(url);
 
     final res = jsonDecode(response.body.toString());

@@ -4,8 +4,6 @@ import 'package:memoir/core/utils/database.dart';
 import 'package:memoir/models/memory.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as syspaths;
-import 'package:sqflite/sqflite.dart' as sql;
-import 'package:sqflite/sqlite_api.dart';
 
 class UserMemoryNotifier extends StateNotifier<List<Memory>> {
   UserMemoryNotifier() : super(const []);
