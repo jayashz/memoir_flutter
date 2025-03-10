@@ -57,7 +57,7 @@ class _LocationInputState extends State<LocationInput> {
     userLocation = PlaceLocation(
         address: formattedLocation, latitude: latitude, longitude: longitude);
 
-    widget.getLocation(userLocation);
+    widget.getLocation(userLocation!);
 
     mapImageUrl =
         'https://maps.geoapify.com/v1/staticmap?style=osm-bright-smooth&width=400&height=300&center=lonlat%3A$longitude%2C$latitude&zoom=14.3497&marker=lonlat%3A$longitude%2C$latitude&apiKey=5d2ebf29a4284b56996ce858fcf181e9';
@@ -73,22 +73,28 @@ class _LocationInputState extends State<LocationInput> {
       'No location selected',
     );
     if (userLocation != null) {
-      previewContent = Image.network(mapImageUrl!);
+      previewContent = Image.network(
+        mapImageUrl!,
+        fit: BoxFit.cover,
+      );
     }
     if (_isGettingLocation == true) {
       previewContent = CircularProgressIndicator();
     }
     return Column(
       children: [
-        Container(
-            height: 250,
-            width: double.infinity,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-                border: Border.all(width: 1),
-                color: Theme.of(context).colorScheme.primary.withAlpha(20),
-                borderRadius: BorderRadius.circular(12)),
-            child: previewContent),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Container(
+              height: 250,
+              width: double.infinity,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  border: Border.all(width: 1),
+                  color: Theme.of(context).colorScheme.primary.withAlpha(20),
+                  borderRadius: BorderRadius.circular(12)),
+              child: previewContent),
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [

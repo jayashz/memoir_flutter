@@ -22,12 +22,37 @@ class _PhotoInputState extends State<PhotoInput> {
     widget.onPickPhoto(_pickedPhoto!);
   }
 
+  void _pickPic() async {
+    final photoPicker = ImagePicker();
+    final pickedPhoto =
+        await photoPicker.pickImage(source: ImageSource.gallery);
+    if (pickedPhoto == null) return;
+    setState(() {
+      _pickedPhoto = File(pickedPhoto.path);
+    });
+    widget.onPickPhoto(_pickedPhoto!);
+  }
+
   @override
   Widget build(BuildContext context) {
-    Widget content = TextButton.icon(
-      onPressed: _takePicture,
-      icon: Icon(Icons.camera_alt),
-      label: Text("Take a picture"),
+    Widget content = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        TextButton.icon(
+          onPressed: _takePicture,
+          icon: Icon(Icons.camera_alt),
+          label: Text(
+            "Take a picture",
+          ),
+        ),
+        TextButton.icon(
+          onPressed: _pickPic,
+          icon: Icon(Icons.photo),
+          label: Text(
+            "Pick from gallery",
+          ),
+        ),
+      ],
     );
 
     if (_pickedPhoto != null) {
@@ -40,15 +65,18 @@ class _PhotoInputState extends State<PhotoInput> {
     }
     return GestureDetector(
       onTap: _takePicture,
-      child: Container(
-          height: 250,
-          width: double.infinity,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-              border: Border.all(width: 1),
-              color: Theme.of(context).colorScheme.primary.withAlpha(20),
-              borderRadius: BorderRadius.circular(12)),
-          child: content),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Container(
+            height: 250,
+            width: double.infinity,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+                border: Border.all(width: 1),
+                color: Theme.of(context).colorScheme.primary.withAlpha(20),
+                borderRadius: BorderRadius.circular(12)),
+            child: content),
+      ),
     );
   }
 }

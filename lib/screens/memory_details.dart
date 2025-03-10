@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:memoir/models/memory.dart';
 
@@ -13,8 +14,33 @@ class MemoryDetailsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image(
-              image: FileImage(memory.photo),
+            Container(
+              padding: EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image(
+                  image: FileImage(memory.photo),
+                ),
+              ),
+            ),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(CupertinoIcons.heart),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(CupertinoIcons.delete),
+                ),
+              ],
+            ),
+            Text(
+              memory.memoryDescription,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
           ],
         ),

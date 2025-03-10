@@ -12,11 +12,17 @@ class PlaceLocation {
 }
 
 class Memory {
-  Memory({required this.title, required this.photo, required this.location})
-      : id = uuid.v4();
+  Memory(
+      {required this.title,
+      required this.photo,
+      required this.location,
+      this.memoryDescription = 'No description was added!',
+      String? id})
+      : id = id ?? uuid.v4();
 
   final String id;
   final String title;
   final File photo;
+  final String memoryDescription;
   final PlaceLocation location;
 }

@@ -5,6 +5,7 @@ import 'package:memoir/core/utils/location_input.dart';
 import 'package:memoir/models/memory.dart';
 import 'package:memoir/providers/user_memory.dart';
 import 'package:memoir/core/utils/photo_input.dart';
+import 'package:memoir/widgets/CustomInput.dart';
 
 class AddMemoryScreen extends ConsumerStatefulWidget {
   const AddMemoryScreen({super.key});
@@ -17,16 +18,17 @@ class _AddMemoryState extends ConsumerState<AddMemoryScreen> {
   final _titleController = TextEditingController();
   File? _pickedPhoto;
   PlaceLocation? _userPlace;
+  String? memoryDescription;
 
   void _saveMemory() {
     final enteredTitle = _titleController.text;
-    if (enteredTitle.isEmpty || _userPlace == null || _pickedPhoto == null) {
+    if (enteredTitle.isEmpty || _pickedPhoto == null) {
       return;
     }
 
     ref
         .read(userMemoryProvider.notifier)
-        .addMemory(enteredTitle, _pickedPhoto!, _userPlace!);
+        .addMemory(enteredTitle, _pickedPhoto!, _userPlace!, memoryDescription);
 
     Navigator.of(context).pop();
   }
@@ -42,7 +44,7 @@ class _AddMemoryState extends ConsumerState<AddMemoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add new place"),
+        title: Text("Add new memory"),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(12),
@@ -66,6 +68,12 @@ class _AddMemoryState extends ConsumerState<AddMemoryScreen> {
             ),
             LocationInput(getLocation: (place) {
               _userPlace = place;
+            }),
+            const SizedBox(
+              height: 20,
+            ),
+            Custominput(onAddMemoryDescription: (String des) {
+              memoryDescription = des;
             }),
             const SizedBox(
               height: 20,
