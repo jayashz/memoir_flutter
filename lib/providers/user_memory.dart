@@ -16,14 +16,14 @@ class UserMemoryNotifier extends StateNotifier<List<Memory>> {
     final memories = data
         .map(
           (row) => Memory(
-            id: row['id'] as String,
-            title: row['title'] as String,
-            photo: File(row['photo'] as String),
-            location: PlaceLocation(
-                address: row['address'] as String,
-                latitude: row['lat'] as double,
-                longitude: row['lng'] as double),
-          ),
+              id: row['id'] as String,
+              title: row['title'] as String,
+              photo: File(row['photo'] as String),
+              location: PlaceLocation(
+                  address: row['address'] as String,
+                  latitude: row['lat'] as double,
+                  longitude: row['lng'] as double),
+              memoryDescription: row['description'] as String),
         )
         .toList();
     state = memories;
